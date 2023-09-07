@@ -22,7 +22,6 @@ export const Login = () => {
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let response = await LoginUser(form)
-
     if (response.message == 'Login Sucessful') {
       localStorage.setItem('token', response?.token)
       Toast({ toast, message: response.message, color: 'green' })

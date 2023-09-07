@@ -1,18 +1,18 @@
-import { Box, Button, Heading, Table, TableCaption, Tbody, Td, Tfoot, Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react"
+import { Box, Button, Heading, Table, TableCaption, Tbody, Td,  Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from 'react'
 import { Employee, getEmployeeData } from "../utils/getEmployeeData"
 import { getNormalData } from "../utils/getNormalData"
 import EditModal from "./EditModal"
 import { useDispatch, useSelector } from "react-redux"
-import { addNewEmployee, allemployee } from "../redux/employeeReducer"
+import {  allemployee } from "../redux/employeeReducer"
 import { Pagination } from "./Pagination"
 import { RootState } from '../redux/store';
 import { deleteEmployee } from "../utils/deleteEmployee"
 import { Toast } from "./Toast"
-import { useSearchParams } from "react-router-dom"
+import { URLSearchParamsInit, useSearchParams } from "react-router-dom"
 import { setTotalPages } from "../redux/totalPagesReducer"
 
-let api = 'http://localhost:8080/employee'
+let api = 'https://ems-api-5j0f.onrender.com/employee'
 
 export interface QueryObject {
     page?: string | number | null,
@@ -41,16 +41,15 @@ export const DashBoardTable = () => {
         let pages = Math.ceil(+totalPages.value / 5)
         const querySearch = searchParams.get('q')
         let queryAPI = `${api}?page=${queryPage}&limit=5`
-        let newQuery: QueryObject = {
-            page: queryPage
-        }
+        let newQuery: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined = { page: `${queryPage}`}
+
         if (queryPage < 1 && empoloyeesData?.value?.length == 0) {
             newQuery['page'] = `${queryPage - 1}`
         }
 
         if (querySearch) {
             queryAPI = `${api}?page=${queryPage}&limit=5&q=${querySearch}`
-            newQuery.page = queryPage
+            newQuery.page = `${queryPage}`
             newQuery.q = querySearch
         }
         if (sort) {
@@ -60,7 +59,7 @@ export const DashBoardTable = () => {
         // console.log(queryPage,pages)
         if (pages !== 0 && pages < queryPage) {
             queryAPI = `${api}?page=${pages}&limit=5&q=${querySearch}&order=${sort}`
-            newQuery.page = pages;
+            newQuery.page = `${pages}`;
         }
 
         let response = await getEmployeeData(`${queryAPI}`);

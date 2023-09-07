@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/react"
-import { useParams, useSearchParams } from "react-router-dom"
+import {  useSearchParams } from "react-router-dom"
 import { useEffect, useState } from 'react'
 type TotalPages = {
     totalPages: number
@@ -14,10 +14,11 @@ export const Pagination = ({ totalPages }: TotalPages) => {
     const querySearch = searchParams.get('q')
     let order = searchParams.get('order')
     let filter = searchParams.get("sortBy")
-
+    
+    
     async function handlePagination(pageNumber: number) {
-        // console.log(querySearch,order,filter)
-        let queryAPI = ""
+        // @ts-ignore
+        var queryAPI = ""
         if (querySearch && order && filter) {
             queryAPI = `${api}?page=${pageNumber}&limit=5&q=${querySearch}&sortBy=${filter}&order=${order}`
             setSearchParams({ page: `${pageNumber}`, q: querySearch, sortBy: filter, order: order })

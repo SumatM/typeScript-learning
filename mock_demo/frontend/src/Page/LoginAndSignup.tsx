@@ -2,7 +2,7 @@ import { Box, Button, Heading } from "@chakra-ui/react"
 import { Login } from "../component/Login"
 import { Signup } from "../component/Signup"
 import { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export const LoginAndSignup = () => {
     const [showBox, setShowBox] = useState('login')

@@ -1,11 +1,11 @@
 import { Box, Button, Heading, Input, Select, useDisclosure, useToast } from "@chakra-ui/react"
-import { DashBoardTable, QueryObject } from "../component/DashBoardTable"
+import { DashBoardTable } from "../component/DashBoardTable"
 import EditModal from "../component/EditModal";
 import { getEmployeeData } from "../utils/getEmployeeData";
 import { useDispatch } from "react-redux";
 import { allemployee } from "../redux/employeeReducer";
 import { useState } from 'react'
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { URLSearchParamsInit, useNavigate, useSearchParams } from "react-router-dom";
 import { GrSearch } from 'react-icons/gr'
 import { setTotalPages } from "../redux/totalPagesReducer";
 import { logoutUser } from "../utils/logoutUser";
@@ -21,10 +21,10 @@ export const Dashboard = () => {
   const [order, setOrder] = useState(searchParam.get('order') || '')
   let querysearch = searchParam.get('q');
   const [search, setSearch] = useState(searchParam.get('q') || "")
-  const sortBy = searchParam.get('sortBy')
+  const sortBy : any = searchParam.get('sortBy')
   const toast = useToast();
 
-  let api = 'http://localhost:8080/employee'
+  let api = 'https://ems-api-5j0f.onrender.com/employee'
 
 
   const departmentOptions = [
@@ -44,14 +44,14 @@ export const Dashboard = () => {
   async function handleSorting(e: React.ChangeEvent<HTMLSelectElement>) {
     let queryAPI = ""
     setOrder(e.target.value);
-    let newQuery: QueryObject = {}
+    let newQuery: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined = {}
     if (querysearch) {
-      newQuery.page = 1
+      newQuery.page = `1`
       newQuery.order = e.target.value;
       newQuery.q = querysearch
       queryAPI = `${api}?order=${e.target.value}&page=${1}&limit=5&q=${querysearch}`
     } else {
-      newQuery.page = 1
+      newQuery.page = `1`
       newQuery.order = e.target.value;
       queryAPI = `${api}?order=${e.target.value}&page=${1}&limit=5`
     }
@@ -102,14 +102,14 @@ export const Dashboard = () => {
   async function handleDepartmentFilter(e: React.ChangeEvent<HTMLSelectElement>) {
     // console.log(e.target.value);
     let queryAPI = ""
-    let newQuery: QueryObject = {}
+    let newQuery : URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined  = {}
     if (querysearch) {
-      newQuery.page = 1
+      newQuery.page = `1`
       newQuery.q = querysearch
       newQuery.sortBy = e.target.value
       queryAPI = `${api}?sortBy=${e.target.value}&page=1&limit=5&q=${querysearch}`
     } else {
-      newQuery.page = 1
+      newQuery.page = `1`
       newQuery.sortBy = e.target.value
       queryAPI = `${api}?sortBy=${e.target.value}&page=${1}&limit=5`
     }

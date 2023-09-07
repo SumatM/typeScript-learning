@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let api = 'http://localhost:8080/signup'
+let api = 'https://ems-api-5j0f.onrender.com/signup'
 
 interface SignupDetails {
    email: string,

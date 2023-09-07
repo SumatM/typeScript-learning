@@ -18,7 +18,7 @@ interface Modal {
 }
 
 
-const EditModal = ({ isOpen, onOpen, onClose, title, id }: Modal) => {
+const EditModal = ({ isOpen, onClose, title, id }: Modal) => {
 
     const [form, setForm] = useState({ fname: '', lname: '', email: '', salary: 0, department: '', _id: '' })
 

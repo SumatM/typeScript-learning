@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let api = 'http://localhost:8080/employee/'
+let api = 'https://ems-api-5j0f.onrender.com/employee/'
 
 export interface Employee {
   department: string,
