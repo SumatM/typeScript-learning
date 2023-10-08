@@ -29,8 +29,8 @@ export const LoginAndSignup = () => {
 
     return (
         <Box bg='blue.300' h='100vh' display='flex' justifyContent='center' alignItems='center' >
-            <Box bg='white' padding='2rem' w='40vw' outline={'1px solid'} boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px">
-                <Box textAlign='center'>
+            <Box bg='white' padding='2rem' w={{base:'90vw',sm:"70%",md:'60%',lg:'40%'}} outline={'1px solid'} boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" >
+                <Box textAlign='center' >
                     <Heading size='lg'>{showBox == 'login' ? 'Login Form' : 'Signup Form'}</Heading>
                 </Box>
                 <Box mt='3rem' display='flex' justifyContent='space-between'>

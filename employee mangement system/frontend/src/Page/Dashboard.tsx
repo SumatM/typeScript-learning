@@ -21,7 +21,7 @@ export const Dashboard = () => {
   const [order, setOrder] = useState(searchParam.get('order') || '')
   let querysearch = searchParam.get('q');
   const [search, setSearch] = useState(searchParam.get('q') || "")
-  const sortBy : any = searchParam.get('sortBy')
+  const sortBy: any = searchParam.get('sortBy')
   const toast = useToast();
 
   let api = 'https://ems-api-5j0f.onrender.com/employee'
@@ -102,7 +102,7 @@ export const Dashboard = () => {
   async function handleDepartmentFilter(e: React.ChangeEvent<HTMLSelectElement>) {
     // console.log(e.target.value);
     let queryAPI = ""
-    let newQuery : URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined  = {}
+    let newQuery: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined = {}
     if (querysearch) {
       newQuery.page = `1`
       newQuery.q = querysearch
@@ -124,12 +124,12 @@ export const Dashboard = () => {
       <Box>
         <Heading>Employee Management Software</Heading>
       </Box>
-      <Box mt='2.5rem' display={'flex'} justifyContent='space-between'>
-        <Box>
+      <Box mt='2.5rem' display={'flex'} justifyContent='space-between' flexDir={{ base: 'column',md:"row" }}>
+        <Box display={{ base: 'flex', sm: "block" }} justifyContent='space-between'>
           <Button outline={'1px solid'} colorScheme="blue" onClick={handleAddEmployee}> Add Employee</Button>
           <Button outline={'1px solid'} ml='2rem' onClick={handelLogout}>Logout</Button>
         </Box>
-        <Box>
+        <Box mt='1rem'>
           <Select outline={'1px solid'} onChange={handleDepartmentFilter} value={sortBy}>
             <option value=''>Sort Employee By department</option>
             {departmentOptions.map((option) => (
@@ -139,8 +139,8 @@ export const Dashboard = () => {
             ))}
           </Select>
         </Box>
-        <Box>
-          <Select outline={'1px solid'} onChange={handleSorting} value={order}>
+        <Box mt={'1rem'}>
+          <Select w='auto' outline={'1px solid'} onChange={handleSorting} value={order}>
             <option value=''>Sort Employee By Salary</option>
             <option value='desc'>High to Low</option>
             <option value='asc'>Low to High</option>
@@ -153,7 +153,7 @@ export const Dashboard = () => {
           <Button type="submit" colorScheme="blue" ml='1.5rem'><GrSearch /> </Button>
         </form>
       </Box>
-      <Box mt='2rem'>
+      <Box mt='2rem' overflow='scroll'>
         <DashBoardTable />
       </Box>
       <EditModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} title={"Add"} />

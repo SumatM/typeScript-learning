@@ -1,10 +1,10 @@
-import { Box, Button, Heading, Table, TableCaption, Tbody, Td,  Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react"
+import { Box, Button, Heading, Table, TableCaption, Tbody, Td, Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from 'react'
 import { Employee, getEmployeeData } from "../utils/getEmployeeData"
 import { getNormalData } from "../utils/getNormalData"
 import EditModal from "./EditModal"
 import { useDispatch, useSelector } from "react-redux"
-import {  allemployee } from "../redux/employeeReducer"
+import { allemployee } from "../redux/employeeReducer"
 import { Pagination } from "./Pagination"
 import { RootState } from '../redux/store';
 import { deleteEmployee } from "../utils/deleteEmployee"
@@ -41,7 +41,7 @@ export const DashBoardTable = () => {
         let pages = Math.ceil(+totalPages.value / 5)
         const querySearch = searchParams.get('q')
         let queryAPI = `${api}?page=${queryPage}&limit=5`
-        let newQuery: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined = { page: `${queryPage}`}
+        let newQuery: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit) | undefined = { page: `${queryPage}` }
 
         if (queryPage < 1 && empoloyeesData?.value?.length == 0) {
             newQuery['page'] = `${queryPage - 1}`
@@ -127,7 +127,7 @@ export const DashBoardTable = () => {
                             <Td>{item.department}</Td>
                             <Td>${item.salary}</Td>
                             <Td>{getNormalData(item.createdAt)}</Td>
-                            <Td>
+                            <Td display='flex'>
                                 <Button onClick={() => { handleUpdateEmployee(item._id) }} outline='1px solid'>Edit</Button>
                                 <Button outline='1px solid' ml='1rem' onClick={() => handledeleteEmployee(item._id)}>Delete</Button>
                             </Td>
